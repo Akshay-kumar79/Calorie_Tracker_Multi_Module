@@ -14,8 +14,12 @@ import androidx.navigation.compose.rememberNavController
 import com.akshaw.calorietrackermultimodule.navigation.navigate
 import com.akshaw.calorietrackermultimodule.ui.theme.CalorieTrackerMultiModuleTheme
 import com.akshaw.core.navigation.Route
+import com.akshaw.onboarding_presentation.activity.ActivityScreen
 import com.akshaw.onboarding_presentation.age.AgeScreen
 import com.akshaw.onboarding_presentation.gender.GenderScreen
+import com.akshaw.onboarding_presentation.goal.GoalScreen
+import com.akshaw.onboarding_presentation.height.HeightScreen
+import com.akshaw.onboarding_presentation.weight.WeightScreen
 import com.akshaw.onboarding_presentation.welcome.WelcomeScreen
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -49,18 +53,24 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         composable(Route.HEIGHT) {
-
+                            HeightScreen(
+                                scaffoldState = scaffoldState,
+                                onNavigate = navController::navigate
+                            )
                         }
                         composable(Route.WEIGHT) {
-
-                        }
-                        composable(Route.NUTRIENT_GOAL) {
-
+                            WeightScreen(
+                                scaffoldState = scaffoldState,
+                                onNavigate = navController::navigate
+                            )
                         }
                         composable(Route.ACTIVITY) {
-
+                            ActivityScreen(onNavigate = navController::navigate)
                         }
                         composable(Route.GOAL) {
+                            GoalScreen(onNavigate = navController::navigate)
+                        }
+                        composable(Route.NUTRIENT_GOAL) {
 
                         }
                         composable(Route.TRACKER_OVERVIEW) {

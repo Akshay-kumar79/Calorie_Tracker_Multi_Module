@@ -1,4 +1,4 @@
-package com.akshaw.onboarding_presentation.age
+package com.akshaw.onboarding_presentation.weight
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -10,7 +10,6 @@ import com.akshaw.core.domain.use_case.FilterOutDigits
 import com.akshaw.core.navigation.Route
 import com.akshaw.core.util.UiEvent
 import com.akshaw.core.util.UiText
-import com.akshaw.core.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -18,35 +17,34 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AgeViewModel @Inject constructor(
-    private val preferences: Preferences,
-    private val filterOutDigits: FilterOutDigits
+class WeightViewModel @Inject constructor(
+    private val preferences: Preferences
 ) : ViewModel() {
 
-    var age by mutableStateOf("20")
+    var weight by mutableStateOf("80")
         private set
 
     private val _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
-    fun onAgeEnter(age: String) {
-        if (age.length <= 3) {
-            this.age = filterOutDigits(age)
+    fun onWeightEnter(weight: String) {
+        if (weight.length <= 5) {
+            this.weight = weight
         }
     }
 
     fun onNextClick() {
         viewModelScope.launch {
-            val ageNumber = age.toIntOrNull() ?: run {
+            val weightNumber = weight.toFloatOrNull() ?: run {
                 _uiEvent.send(
                     UiEvent.ShowSnackBar(
-                        UiText.StringResource(R.string.error_age_cant_be_empty)
+                        UiText.StringResource(com.akshaw.core.R.string.error_weight_cant_be_empty)
                     )
                 )
                 return@launch
             }
-            preferences.saveAge(ageNumber)
-            _uiEvent.send(UiEvent.Navigate(Route.HEIGHT))
+            preferences.saveWeight(weightNumber)
+            _uiEvent.send(UiEvent.Navigate(Route.ACTIVITY))
         }
     }
 
