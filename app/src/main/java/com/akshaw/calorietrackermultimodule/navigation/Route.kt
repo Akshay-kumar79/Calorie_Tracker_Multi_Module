@@ -1,4 +1,4 @@
-package com.akshaw.core.navigation
+package com.akshaw.calorietrackermultimodule.navigation
 
 object Route {
     const val WELCOME = "welcome"

@@ -13,17 +13,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.akshaw.core.R
-import com.akshaw.core.domain.model.ActivityLevel
 import com.akshaw.core.domain.model.GoalType
 import com.akshaw.core.util.UiEvent
 import com.akshaw.core_ui.LocalSpacing
 import com.akshaw.onboarding_presentation.components.ActionButton
 import com.akshaw.onboarding_presentation.components.SelectableButton
-import kotlinx.coroutines.flow.collect
 
 @Composable
 fun GoalScreen(
-    onNavigate: (UiEvent.Navigate) -> Unit,
+    onNextClick: () -> Unit,
     viewModel: GoalViewModel = hiltViewModel()
 ){
     val spacing = LocalSpacing.current
@@ -31,7 +29,7 @@ fun GoalScreen(
     LaunchedEffect(key1 = true){
         viewModel.uiEvent.collect{ event ->
             when(event){
-                is UiEvent.Navigate -> onNavigate(event)
+                is UiEvent.Success -> onNextClick()
                 else -> Unit
             }
         }

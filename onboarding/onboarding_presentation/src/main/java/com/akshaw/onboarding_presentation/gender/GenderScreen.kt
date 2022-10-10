@@ -11,20 +11,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.akshaw.core.R
 import com.akshaw.core.domain.model.Gender
-import com.akshaw.core.navigation.Route
 import com.akshaw.core.util.UiEvent
 import com.akshaw.core_ui.LocalSpacing
 import com.akshaw.onboarding_presentation.components.ActionButton
 import com.akshaw.onboarding_presentation.components.SelectableButton
-import kotlinx.coroutines.flow.collect
 
 @Composable
 fun GenderScreen(
-    onNavigate: (UiEvent.Navigate) -> Unit,
+    onNextClick: () -> Unit,
     viewModel: GenderViewModel = hiltViewModel()
 ){
     val spacing = LocalSpacing.current
@@ -32,7 +29,7 @@ fun GenderScreen(
     LaunchedEffect(key1 = true){
         viewModel.uiEvent.collect{ event ->
             when(event){
-                is UiEvent.Navigate -> onNavigate(event)
+                is UiEvent.Success -> onNextClick()
                 else -> Unit
             }
         }

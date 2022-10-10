@@ -1,4 +1,4 @@
-package com.akshaw.calorietrackermultimodule.ui.theme
+package com.akshaw.core_ui
 
 import androidx.compose.ui.graphics.Color
 
