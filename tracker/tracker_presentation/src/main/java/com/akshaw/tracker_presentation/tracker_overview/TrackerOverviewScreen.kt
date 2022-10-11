@@ -8,6 +8,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.capitalize
+import androidx.compose.ui.text.intl.Locale
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.annotation.ExperimentalCoilApi
 import com.akshaw.core.R
@@ -15,6 +17,7 @@ import com.akshaw.core.util.UiEvent
 import com.akshaw.core_ui.LocalSpacing
 import com.akshaw.tracker_domain.model.MealType
 import com.akshaw.tracker_presentation.tracker_overview.components.*
+import java.util.*
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable
@@ -73,7 +76,7 @@ fun TrackerOverviewScreen(
                         AddButton(
                             text = stringResource(
                                 id = R.string.add_meal,
-                                meal.name.asString(context)
+                                meal.mealType.name.capitalize(Locale.current)
                             ),
                             onClick = {
                                 onNavigateToSearch(

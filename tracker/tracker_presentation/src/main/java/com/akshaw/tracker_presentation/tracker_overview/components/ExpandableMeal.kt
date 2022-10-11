@@ -16,6 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.capitalize
+import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.unit.sp
 import com.akshaw.core.R
 import com.akshaw.core_ui.LocalSpacing
@@ -55,7 +57,7 @@ fun ExpandableMeal(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(
-                        text = meal.name.asString(context),
+                        text = meal.mealType.name.capitalize(Locale.current),
                         style = MaterialTheme.typography.h6
                     )
                     Icon(
